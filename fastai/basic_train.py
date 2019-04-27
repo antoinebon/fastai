@@ -370,9 +370,9 @@ class Learner():
             if norm.keywords.get('do_y',False): pred = self.data.denorm(pred)
         ds = self.data.single_ds
         pred = ds.y.analyze_pred(raw_pred, **kwargs)
-        x_item = ds.x.reconstruct(x[0])
-        y_item = ds.y.reconstruct(pred, x_item) if has_arg(ds.y.reconstruct, 'x') else ds.y.reconstruct(pred)
-        return x_item, y_item, pred, raw_pred
+        x = ds.x.reconstruct(x[0])
+        y = ds.y.reconstruct(pred, x) if has_arg(ds.y.reconstruct, 'x') else ds.y.reconstruct(pred)
+        return x, y, pred, raw_pred
 
     def validate(self, dl=None, callbacks=None, metrics=None):
         "Validate on `dl` with potential `callbacks` and `metrics`."
